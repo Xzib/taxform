@@ -17,23 +17,28 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Item Description and cost-->
-                <TextBox Grid.Column="0" 
-                         Text="Enter Item Name"
-                         Margin="0 10 10 10"
-                         Padding="2"
-                         Background="#eeee"
+                <TextBox
+                    x:Name="ItemName"
+                    Grid.Column="0" 
+                    Text="Enter Item Name"
+                    Margin="0 10 10 10"
+                    Padding="2"
+                    Background="#eeee"
                          />
 
                 <!--Item Cost-->
-                <TextBox Grid.Column="1" 
-                         Text="Enter Item Cost"
-                         TextChanged="TextBox_TextChanged"
-                         Margin="0 10 10 10"
-                         Padding="2"
-                         Background="#eeee"/>
+                <TextBox 
+                    x:Name="ItemCost"     
+                    Grid.Column="1" 
+                    Text="Enter Item Cost"
+                    TextChanged="TextBox_TextChanged"                        
+                    Margin="0 10 10 10"
+                    Padding="2"     
+                    Background="#eeee"/>
 
                 <!--CURRENCY SELECTION-->
-                <ComboBox Grid.Column="2" Margin="0 10 10 10" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBox x:Name="CurrencySelection"  Grid.Column="2" Margin="0 10 10 10" 
+                          SelectionChanged="ComboBox_SelectionChanged">
                     <ComboBoxItem>USD</ComboBoxItem>
                     <ComboBoxItem>EUR</ComboBoxItem>
                     <ComboBoxItem>GBP</ComboBoxItem>

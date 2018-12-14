@@ -27,21 +27,30 @@ namespace TaxCalculatorForImportItem
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
             var textBox_text = sender as TextBox;
             int itemCost = Int32.Parse(textBox_text.Text);
+            string comboBoxText = this.CurrencySelection.Text;
+            switch (comboBoxText)
+            {
+                case "USD":
+                    const int usdExchangeRate = 140;
+                    var UsdconvetToRs = itemCost * usdExchangeRate;
+                    break;
+                case "EUR":
+                    const int EurExchangeRate = 140;
+                    var EurconvetToRs = itemCost * EurExchangeRate;
+                    break;
+                
+            }
 
-            
-            
-            
+
+
+
 
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            var currency = sender as ComboBox;
-            
-        }
+       
 
         #region HelperFunction
         
