@@ -29,32 +29,38 @@ namespace TaxCalculatorForImportItem
         {
             
             var textBox_text = sender as TextBox;
-            int itemCost = Int32.Parse(textBox_text.Text);
+            string text1 = textBox_text.Text;
+            int itemCost = Int32.Parse(text1);
             string comboBoxText = this.CurrencySelection.Text;
             switch (comboBoxText)
             {
                 case "USD":
                     const int usdExchangeRate = 140;
-                    var UsdconvetToRs = itemCost * usdExchangeRate;
+                    int UsdconvetToRs = itemCost * usdExchangeRate;
+                    string testValue = UsdconvetToRs.ToString();
                     break;
                 case "EUR":
                     const int EurExchangeRate = 140;
-                    var EurconvetToRs = itemCost * EurExchangeRate;
+                    int EurconvetToRs = itemCost * EurExchangeRate;
+                    testValue = EurconvetToRs.ToString();
                     break;
                 
             }
 
+            
 
 
 
 
         }
 
-       
+
 
         #region HelperFunction
-        
+
 
         #endregion
+
+        
     }
 }
