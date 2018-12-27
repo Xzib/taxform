@@ -23,44 +23,83 @@ namespace TaxCalculatorForImportItem
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new BaseViewModel();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CurrencySelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            BaseViewModel assesedValue = new BaseViewModel() { AssesedValue = GetNewValue() };
+            this.CalculatedValue.Text= assesedValue.AssesedValue;
+        }
+
+        private string GetNewValue()
+        {
+            //Assesed Value Calculation
+            int assesedValue;
+            bool inputCost = int.TryParse(this.ItemCost.Text,out assesedValue);
+
+
+            float currencyTolerance = float.Parse(this.CurrencyTolerance.Text);
+
+
+            float insuranceValue = float.Parse(this.Insurance.Text);
             
-            var textBox_text = sender as TextBox;
-            string text1 = textBox_text.Text;
-            int itemCost = Int32.Parse(text1);
-            string comboBoxText = this.CurrencySelection.Text;
-            switch (comboBoxText)
+
+
+            string currType =this.CurrencySelection.SelectedItem.ToString();
+            if (currType.Contains("USD"))
             {
-                case "USD":
-                    const int usdExchangeRate = 140;
-                    int UsdconvetToRs = itemCost * usdExchangeRate;
-                    string testValue = UsdconvetToRs.ToString();
-                    break;
-                case "EUR":
-                    const int EurExchangeRate = 140;
-                    int EurconvetToRs = itemCost * EurExchangeRate;
-                    testValue = EurconvetToRs.ToString();
-                    break;
-                
+
+                int usd = (Int32)CurrencyValue.USD;
+                int value = assesedValue * usd;
+                float Nvalue =value+value * (currencyTolerance/100);
+                float result =Nvalue+Nvalue * (insuranceValue / 100);
+                return (String)(result).ToString();
             }
 
-            
+            else if (currType.Contains("EUR"))
+            {
 
+                int eur = (Int32)CurrencyValue.EUR;
+                int value = assesedValue * eur;
+                float Nvalue = value + value * (currencyTolerance / 100);
+                float result = Nvalue + Nvalue * (insuranceValue / 100);
+                return (String)(result).ToString();
+            }
 
+            else if (currType.Contains("GBP"))
+            {
 
+                int pound = (Int32)CurrencyValue.GBP;
+                int value = assesedValue * pound;
+                float Nvalue = value + value * (currencyTolerance / 100);
+                float result = Nvalue + Nvalue * (insuranceValue / 100);
+                return (String)(result).ToString();
+            }
+
+            else if (currType.Contains("YUAN"))
+            {
+
+                int yuan = (Int32)CurrencyValue.YUAN;
+                int value = assesedValue * yuan;
+                float Nvalue = value + value * (currencyTolerance / 100);
+                float result = Nvalue + Nvalue * (insuranceValue / 100);
+                return (String)(result).ToString();
+            }
+
+            else if (currType.Contains("Rs"))
+            {
+
+                int rs = (Int32)CurrencyValue.RS;
+                int value = assesedValue * rs;
+                float Nvalue = value + value * (currencyTolerance / 100);
+                float result = Nvalue + Nvalue * (insuranceValue / 100);
+                return (String)(result).ToString();
+            }
+            else
+                return "problem";
 
         }
-
-
-
-        #region HelperFunction
-
-
-        #endregion
-
-        
     }
+
 }
