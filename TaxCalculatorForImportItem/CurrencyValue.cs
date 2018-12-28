@@ -12,7 +12,8 @@ namespace TaxCalculatorForImportItem
         EUR = 160,
         GBP = 170,
         YUAN = 21,
-        RS = 1
+        RS = 1,
+        
 
     }
 }

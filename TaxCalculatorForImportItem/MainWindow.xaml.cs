@@ -15,12 +15,36 @@ namespace TaxCalculatorForImportItem
             InitializeComponent();
             this.DataContext = new BaseViewModel();
         }
-
-        private void CurrencySelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+             
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BaseViewModel assesedValue = new BaseViewModel() { AssesedValue = GetNewValue() };
-            this.CalculatedValue.Text= assesedValue.AssesedValue;
+            try
+            {
+                BaseViewModel assesedValue = new BaseViewModel()
+                { AssesedValue = GetNewValue()};
+                assesedValue.TotalTax = GetTotalTax(assesedValue.AssesedValue);
+                assesedValue.GrandTotal = GetGrandTotal(assesedValue.AssesedValue, assesedValue.TotalTax);
+                this.CalculatedValue.Text = assesedValue.AssesedValue;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Check Parameters");
+                
+            }
+            
         }
+
+        private string GetGrandTotal(string assesedValue, string totalTax)
+        {
+            
+        }
+
+        private string GetTotalTax(string value)
+        {
+            
+        }
+
+        #region HelperFunction
 
         private string GetNewValue()
         {
@@ -29,57 +53,62 @@ namespace TaxCalculatorForImportItem
             float assesedValue = float.Parse(this.ItemCost.Text);
             float currencyTolerance = float.Parse(this.CurrencyTolerance.Text);
             float insuranceValue = float.Parse(this.Insurance.Text);
-            
-            string currType =this.CurrencySelection.SelectedItem.ToString();
+
+            string currType = this.CurrencySelection.SelectedItem.ToString();
 
             if (currType.Contains("USD"))
             {
-                float usd = (Int32)CurrencyValue.USD;
-                float value = assesedValue * usd;
-                value = value + value * (currencyTolerance / 100);
-                value = value + value * (insuranceValue / 100);
+                float value = GetAnswer((Int32)CurrencyValue.USD, assesedValue, currencyTolerance, insuranceValue);
                 return (String)(value).ToString();
+                
             }
 
             else if (currType.Contains("EUR"))
             {
-                float eur = (Int32)CurrencyValue.EUR;
-                float value = assesedValue * eur;
-                value = value + value * (currencyTolerance / 100);
-                value = value + value * (insuranceValue / 100);
+                float value = GetAnswer((Int32)CurrencyValue.EUR, assesedValue, currencyTolerance, insuranceValue);
                 return (String)(value).ToString();
+                
             }
 
             else if (currType.Contains("GBP"))
             {
 
-                float pound = (Int32)CurrencyValue.GBP;
-                float value = assesedValue * pound;
-                value = value + value * (currencyTolerance / 100);
-                value = value + value * (insuranceValue / 100);
+                float value = GetAnswer((Int32)CurrencyValue.GBP, assesedValue, currencyTolerance, insuranceValue);
                 return (String)(value).ToString();
             }
 
             else if (currType.Contains("YUAN"))
             {
-                float yuan = (Int32)CurrencyValue.YUAN;
-                float value = assesedValue * yuan;
-                value = value + value * (currencyTolerance / 100);
-                value = value + value * (insuranceValue / 100);
+                float value = GetAnswer((Int32)CurrencyValue.YUAN, assesedValue, currencyTolerance, insuranceValue);
                 return (String)(value).ToString();
             }
 
             else if (currType.Contains("Rs"))
             {
-                float rs = (Int32)CurrencyValue.RS;
-                float value = assesedValue * rs;
-                value = value + value * (currencyTolerance / 100);
-                value = value + value * (insuranceValue / 100);
+                float value = GetAnswer((Int32)CurrencyValue.RS,assesedValue,currencyTolerance,insuranceValue);
                 return (String)(value).ToString();
             }
             else
                 return "problem";
         }
+
+        /// <summary>
+        /// Assesed Value calculation   
+        /// </summary>
+        /// <param name="rS">currencyValue</param>
+        /// <param name="assesedValue">BaseObject</param>
+        /// <param name="currencyTolerance">currencyChangePercentage</param>
+        /// <param name="insuranceValue">InsurancePercentage</param>
+        /// <returns></returns>
+        private float GetAnswer(int rS, float assesedValue, float currencyTolerance, float insuranceValue)
+        {
+            float value = assesedValue * rS;
+            value = value + value * (currencyTolerance / 100);
+            value = value + value * (insuranceValue / 100);
+            return value;
+        }
+
+        #endregion
     }
 
 }
