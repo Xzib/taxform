@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaxCalculatorForImportItem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="450">
+        Title="MainWindow" Height="350" Width="450">
     
     
     <Border Padding="10">
@@ -35,7 +35,6 @@
                     Background="#eeee"/>
                 <!--CURRENCY SELECTION-->
                 <ComboBox x:Name="CurrencySelection" 
-                          SelectionChanged="CurrencySelection_SelectionChanged"
                             Grid.Column="2" Margin="0 10 10 10">
                     <ComboBoxItem>USD</ComboBoxItem>
                     <ComboBoxItem>EUR</ComboBoxItem>
@@ -93,6 +92,12 @@
                     </StackPanel>
                 </Grid>
             </Border>
+
+            <TextBlock Text="Applied Taxes" 
+                       FontSize="14" 
+                       FontWeight="Bold"/>
+
+
             <Border>
                 <Border.Background>
                     <LinearGradientBrush>
@@ -101,25 +106,35 @@
                         <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
+
+                
+
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.08*"/>
+                        <ColumnDefinition Width="0.1*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="Applied Taxes" 
-                       FontSize="14" 
-                       FontWeight="Bold"/>
-                        <CheckBox IsChecked="True">ACD</CheckBox>
-                        <CheckBox IsChecked="True">CD</CheckBox>
-                        <CheckBox IsChecked="True">Sales Tax</CheckBox>
-                        <CheckBox IsChecked="True">Income Tax</CheckBox>
+                        <TextBox Name="ACD" HorizontalAlignment="Left" Width="25">2</TextBox>
+                        <TextBox Name="CD"  HorizontalAlignment="Left" Width="25">20</TextBox>
+                        <TextBox Name="ST" HorizontalAlignment="Left" Width="25">17</TextBox>
+                        <TextBox Name="IT" HorizontalAlignment="Left" Width="25">9</TextBox>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" >
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="ACD" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 3 0 5"/>
+                        <TextBlock Text="CD" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 5"/>
+                        <TextBlock Text="ST" HorizontalAlignment="Left" Margin="0 1 0 5"/>
+                        <TextBlock Text="IT" HorizontalAlignment="left" VerticalAlignment="Center" />
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2" >
                         <TextBlock Text="Total Tax" 
                                HorizontalAlignment="Center" 
                                FontSize="16"/>
                         <TextBox 
+                            Name="totaltax"
                              Background="#eeee"
                             IsEnabled="False"
                              />
@@ -127,6 +142,7 @@
                                HorizontalAlignment="Center" 
                                FontSize="16"/>
                         <TextBox 
+                            Name="grandtotal"
                              Background="#eeee"
                             IsEnabled="False"/>
                     </StackPanel>

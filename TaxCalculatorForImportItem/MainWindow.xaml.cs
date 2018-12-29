@@ -25,10 +25,13 @@ namespace TaxCalculatorForImportItem
                 assesedValue.TotalTax = GetTotalTax(assesedValue.AssesedValue);
                 assesedValue.GrandTotal = GetGrandTotal(assesedValue.AssesedValue, assesedValue.TotalTax);
                 this.CalculatedValue.Text = assesedValue.AssesedValue;
+                this.totaltax.Text = assesedValue.TotalTax;
+                this.grandtotal.Text = assesedValue.GrandTotal;
+
             }
-            catch (Exception)
+            catch (Exception )
             {
-                MessageBox.Show("Please Check Parameters");
+                throw;
                 
             }
             
@@ -36,12 +39,58 @@ namespace TaxCalculatorForImportItem
 
         private string GetGrandTotal(string assesedValue, string totalTax)
         {
-            
+            float val, val1;
+            bool value = float.TryParse(assesedValue, out val);
+            bool value2 = float.TryParse(totalTax, out val1);
+            return (val+val1).ToString();
         }
+
+
+        private string GetTotalTax()
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            float value;
+            bool nvalue = float.TryParse(baseView.AssesedValue, out value);
+            float nAcd, nCd, nSt, nIt;
+            nAcd = float.Parse(this.ACD.Text) / 100;
+            nCd = float.Parse(this.CD.Text) / 100;
+            nSt = float.Parse(this.ST.Text) / 100;
+            nIt = float.Parse(this.IT.Text) / 100;
+
+            nAcd = (value) * nAcd;
+            nCd = (value) * nCd;
+
+            float sum = nCd + nAcd;
+
+            nSt = sum * nSt;
+            sum = sum + nSt;
+            nIt = sum * nIt;
+            sum = sum + nIt;
+
+            return (String)sum.ToString();
+        }
+
+
 
         private string GetTotalTax(string value)
         {
-            
+            float nAcd, nCd, nSt, nIt;
+            nAcd = float.Parse(this.ACD.Text)/100;
+            nCd = float.Parse(this.CD.Text)/100;
+            nSt = float.Parse(this.ST.Text)/100;
+            nIt = float.Parse(this.IT.Text)/100;
+
+            nAcd = float.Parse(value) * nAcd;
+            nCd  = float.Parse(value) * nCd;
+
+            float sum =nCd + nAcd;
+
+            nSt = sum * nSt;
+            sum = sum + nSt;
+            nIt = sum* nIt;
+            sum = sum + nIt;
+
+            return (String)sum.ToString();
         }
 
         #region HelperFunction
