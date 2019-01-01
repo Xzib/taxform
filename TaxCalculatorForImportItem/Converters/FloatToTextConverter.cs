@@ -5,16 +5,21 @@ using System.Windows.Data;
 
 namespace TaxCalculatorForImportItem
 {
-    class StringToTextBoxConverter : IValueConverter
+    class FloatToTextConverter : IValueConverter
     {
+        public static FloatToTextConverter instance = new FloatToTextConverter();
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (TextBox)value;
+            return (String)value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string mValue = (String)value;
+
+            float val;
+            bool check = float.TryParse(mValue, out val);
+            return val;
         }
     }
 }

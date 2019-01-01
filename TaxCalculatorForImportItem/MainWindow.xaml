@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaxCalculatorForImportItem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="450">
+        Title="MainWindow" Height="400" Width="450">
     
     
     <Border Padding="10">
@@ -28,14 +28,20 @@
                 <!--Item Cost-->
                 <TextBox 
                    
+                    Text="{Binding ItemCost, 
+                    Converter={x:Static local:FloatToTextConverter.instance}, 
+                    Mode=TwoWay}"
                     x:Name="ItemCost"     
                     Grid.Column="1"                       
                     Margin="0 10 10 10"
                     Padding="2"     
                     Background="#eeee"/>
                 <!--CURRENCY SELECTION-->
-                <ComboBox x:Name="CurrencySelection" 
-                            Grid.Column="2" Margin="0 10 10 10">
+                <ComboBox
+                    
+                    Text="{Binding AvailableCurrency}"
+                    x:Name="CurrencySelection" 
+                    Grid.Column="2" Margin="0 10 10 10">
                     <ComboBoxItem>USD</ComboBoxItem>
                     <ComboBoxItem>EUR</ComboBoxItem>
                     <ComboBoxItem>GBP</ComboBoxItem>
@@ -63,15 +69,17 @@
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="Currency Tolerance" />
                         <TextBox 
-                            Text="1" 
+                            Text="{Binding CurrencyTolerancePercentage, 
+                            Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}" 
                             x:Name="CurrencyTolerance"     
                             Background="#eeee"
                             Margin="0 0 0 2"
                             HorizontalAlignment="Left" Width="66"/>
                     <TextBlock Text="Insurance" />
                         <TextBox 
-                            Text="1"
-                            x:Name="Insurance"
+                            Text="{Binding InsurancePercentage, 
+                            Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
+                            x:Name="Insurance"    
                             Background="#eeee"
                             Margin="0 0 0 10"
                             HorizontalAlignment="Left" Width="66"/>
@@ -81,6 +89,7 @@
                                HorizontalAlignment="Center" 
                                FontSize="18"/>
                         <TextBox 
+                            Text="{Binding AssesedValue}"
                             x:Name="CalculatedValue"
                             IsEnabled="False"
                             Background="#eeee"
@@ -88,7 +97,7 @@
                             Padding="2"
                             VerticalAlignment="Center"
                              />
-                        <Button Click="Button_Click" Content="OK" HorizontalAlignment="Center" Margin="10 2"/>
+                        
                     </StackPanel>
                 </Grid>
             </Border>
@@ -148,6 +157,39 @@
                     </StackPanel>
                 </Grid>
             </Border>
+
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="#eeee" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <StackPanel>
+                    <Button 
+                        
+                        Command="{Binding OKButtonPressed}"
+                        Background="DarkGreen"
+                        Foreground="White"
+                        Content="OK" 
+                        HorizontalAlignment="Center" 
+                        Margin="10 10"
+                        Padding="3"/>
+
+                    <Button  
+                        Background="Orange"
+                        Content="Submit" 
+                        HorizontalAlignment="Center" 
+                        Margin="10 0"
+                        Padding="3"/>
+                </StackPanel>
+                                
+            </Grid>
         </StackPanel>
     </Border>
 </Window>
