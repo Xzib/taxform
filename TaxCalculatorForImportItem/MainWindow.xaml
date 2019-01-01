@@ -125,10 +125,18 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBox Name="ACD" HorizontalAlignment="Left" Width="25">2</TextBox>
-                        <TextBox Name="CD"  HorizontalAlignment="Left" Width="25">20</TextBox>
-                        <TextBox Name="ST" HorizontalAlignment="Left" Width="25">17</TextBox>
-                        <TextBox Name="IT" HorizontalAlignment="Left" Width="25">9</TextBox>
+                        <TextBox Name="ACD" 
+                                 HorizontalAlignment="Left" 
+                                 Width="25"
+                                 Text="{Binding ACD, Converter={x:Static local:FloatToTextConverter.instance}}"/>
+                        <TextBox Name="CD"  
+                                 HorizontalAlignment="Left" 
+                                 Width="25"
+                                 Text="{Binding CD, Converter={x:Static local:FloatToTextConverter.instance}}"/>
+                        <TextBox Name="ST" HorizontalAlignment="Left" Width="25"
+                                 Text="{Binding ST, Converter={x:Static local:FloatToTextConverter.instance}}"/>
+                        <TextBox Name="IT" HorizontalAlignment="Left" Width="25"
+                                 Text="{Binding IT, Converter={x:Static local:FloatToTextConverter.instance}}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
@@ -172,6 +180,7 @@
 
                 <StackPanel>
                     <Button 
+                        
                         
                         Command="{Binding OKButtonPressed}"
                         Background="DarkGreen"

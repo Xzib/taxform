@@ -99,15 +99,12 @@ namespace TaxCalculatorForImportItem
          {
              //Assesed Value Calculation
              string decimalPlaces = "0.00";
-             float assesedValue = float.Parse(this.ItemCost.Text);
-             float currencyTolerance = float.Parse(this.CurrencyTolerance.Text);
-             float insuranceValue = float.Parse(this.Insurance.Text);
-
-             string currType = this.CurrencySelection.SelectedItem.ToString();
+             string currType = AvailableCurrency;
 
              if (currType.Contains("USD"))
              {
-                 float value = GetAnswer((Int32)CurrencyValue.USD, assesedValue, currencyTolerance, insuranceValue);
+                 GetAnswer();
+                 float value = AssesedValue;
                  return (String)(value).ToString(decimalPlaces);
 
              }
