@@ -151,6 +151,7 @@
                                HorizontalAlignment="Center" 
                                FontSize="16"/>
                         <TextBox 
+                            Text="{Binding TotalTax}"
                             Name="totaltax"
                              Background="#eeee"
                             IsEnabled="False"
@@ -159,6 +160,7 @@
                                HorizontalAlignment="Center" 
                                FontSize="16"/>
                         <TextBox 
+                            Text="{Binding GrandTotal}"
                             Name="grandtotal"
                              Background="#eeee"
                             IsEnabled="False"/>
@@ -182,7 +184,7 @@
                     <Button 
                         
                         
-                        Command="{Binding OKButtonPressed}"
+                        Command="{Binding OKButtonPressedCommand}"
                         Background="DarkGreen"
                         Foreground="White"
                         Content="OK" 

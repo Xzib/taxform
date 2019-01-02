@@ -26,7 +26,7 @@ namespace TaxCalculatorForImportItem
         /// </summary>
         public BaseViewModel()
         {
-            this.OKButtonPressedCommand = new DelegateCommand(GetTotalTax);
+            this.OKButtonPressedCommand = new DelegateCommand(this.GetGrandTotal);
         }
 
         #endregion
@@ -74,17 +74,17 @@ namespace TaxCalculatorForImportItem
         /// <summary>
         /// Actual Value of item 
         /// </summary>
-        public string AssesedValue { get; set; } = "Assesed Value";
+        public string AssesedValue { get; set; } = "0";
 
         /// <summary>
         /// Total Tax on the item
         /// </summary>
-        public string TotalTax { get; set; }
+        public string TotalTax { get; set; } = "0";
 
         /// <summary>
         /// Grand Total
         /// </summary>
-        public string GrandTotal { get; set; }
+        public string GrandTotal { get; set; } = "0";
 
         #region Currency Model
 
@@ -111,15 +111,46 @@ namespace TaxCalculatorForImportItem
 
         #region HelperFunctions
 
-       
-        
+        /// <summary>
+        /// Grand Total Calculation
+        /// </summary>
+        private void GetGrandTotal()
+        {
+
+            GetTotalTax();
+            float val, val1;
+            bool value = float.TryParse(AssesedValue, out val);
+            bool value2 = float.TryParse(TotalTax, out val1);
+            GrandTotal =  (val + val1).ToString("0.00");
+        }
 
 
+
+        /// <summary>
+        /// Calculate total tax 
+        /// </summary>
         private void GetTotalTax()
         {
-                string decimalPlaces = "0.00";
-                GetAssesedValue(AvailableCurrency);
-                float value = float.Parse(AssesedValue); 
+            string decimalPlaces = "0.00";
+            SwitchingCurrecny(AvailableCurrency);
+            float value = float.Parse(AssesedValue);
+            float nAcd, nCd, nSt, nIt;
+            nAcd = ACD/ 100;
+            nCd = CD/ 100;
+            nSt = ST/ 100;
+            nIt = IT/ 100;
+
+            nAcd = value * nAcd;
+            nCd = value*nCd;
+
+            float sum = nCd + nAcd;
+
+            nSt = sum * nSt;
+            sum = sum + nSt;
+            nIt = sum * nIt;
+            sum = sum + nIt;
+
+            TotalTax = (String)sum.ToString(decimalPlaces);
 
         }
 
@@ -127,28 +158,28 @@ namespace TaxCalculatorForImportItem
         /// provides the condition for switching the currenct based on selection
         /// </summary>
         /// <param name="exhange">Available Currency type <see cref="AvailableCurrency"/></param>
-        private void GetAssesedValue(Object exhange)
+        private void SwitchingCurrecny(string exhange)
         {
             switch (AvailableCurrency)
             {
                 case "USD":
                     {
                         float value = ItemCost * UsdExchangeRate;
-                        Calculation(value);
+                        AssesedValueCalculation(value);
                         break;
                     }
                 case "EURO":
 
                     {
                         float value = ItemCost * EuroExchangeRate;
-                        Calculation(value);
+                        AssesedValueCalculation(value);
                         break;
                     }
                 case "GBP":
 
                     {
                         float value = ItemCost * GBPExchangeRate;
-                        Calculation(value);
+                        AssesedValueCalculation(value);
                         break;
                     }
 
@@ -164,7 +195,7 @@ namespace TaxCalculatorForImportItem
         /// AssesedValue Calculation
         /// </summary>
         /// <param name="value">converted item cost</param>
-        private void Calculation(float value)
+        private void AssesedValueCalculation(float value)
         {
             value = value + value * (CurrencyTolerancePercentage / 100);
             value = value + value * (InsurancePercentage / 100);

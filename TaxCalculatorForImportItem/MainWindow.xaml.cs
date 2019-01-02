@@ -16,7 +16,7 @@ namespace TaxCalculatorForImportItem
             this.DataContext = new BaseViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+       /* private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -37,16 +37,9 @@ namespace TaxCalculatorForImportItem
 
         }
 
-        private string GetGrandTotal(string assesedValue, string totalTax)
-        {
-            float val, val1;
-            bool value = float.TryParse(assesedValue, out val);
-            bool value2 = float.TryParse(totalTax, out val1);
-            return (val + val1).ToString("0.00");
-        }
+        */
 
-
-        private string GetTotalTax()
+       /* private string GetTotalTax()
         {
             BaseViewModel baseView = new BaseViewModel();
             float value;
@@ -68,31 +61,10 @@ namespace TaxCalculatorForImportItem
             sum = sum + nIt;
 
             return (String)sum.ToString("0.00");
-        }
+        }*/
 
 
-
-        private string GetTotalTax(string value)
-        {
-            float nAcd, nCd, nSt, nIt;
-            nAcd = float.Parse(this.ACD.Text) / 100;
-            nCd = float.Parse(this.CD.Text) / 100;
-            nSt = float.Parse(this.ST.Text) / 100;
-            nIt = float.Parse(this.IT.Text) / 100;
-
-            nAcd = float.Parse(value) * nAcd;
-            nCd = float.Parse(value) * nCd;
-
-            float sum = nCd + nAcd;
-
-            nSt = sum * nSt;
-            sum = sum + nSt;
-            nIt = sum * nIt;
-            sum = sum + nIt;
-
-            return (String)sum.ToString("0.00");
-        }
-
+        
        
 
         /* private string GetNewValue()
