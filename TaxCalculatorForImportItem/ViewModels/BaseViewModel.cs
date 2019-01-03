@@ -32,9 +32,37 @@ namespace TaxCalculatorForImportItem
         #endregion
 
         #region Public Properties
+
+
+
+        /// <summary>
+        /// Name Of Item
+        /// </summary>
+        public string ItemName { get; set; } = "Enter Item Name";
+
+        /// <summary>
+        /// Name Of Vendor
+        /// </summary>
+        public string VendorName { get; set; } = "Enter Vendor Name";
+
+        /// <summary>
+        /// Item Cost Converted To RS
+        /// </summary>
+        public float ConvertedToRs { get; set; } = 0.00F;
+
+
+
+
+
         /// <summary>
         /// Actual Cost of the item
         /// </summary>
+
+
+
+
+
+
         public float ItemCost { get; set; } = 0;
 
         #region PercentageInputs
@@ -94,9 +122,9 @@ namespace TaxCalculatorForImportItem
         /// <summary>
         /// Currency Rates
         /// </summary>
-        public float UsdExchangeRate { get; set; } = 140;
-        public float EuroExchangeRate { get; set; } = 160;
-        public float GBPExchangeRate { get; set; } = 170;
+        public float UsdExchangeRate { get; set; } = 139.72F;
+        public float EuroExchangeRate { get; set; } = 160.28F;
+        public float GBPExchangeRate { get; set; } = 178.16F;
 
         #endregion
 
@@ -168,7 +196,7 @@ namespace TaxCalculatorForImportItem
                         AssesedValueCalculation(value);
                         break;
                     }
-                case "EURO":
+                case "EUR":
 
                     {
                         float value = ItemCost * EuroExchangeRate;
