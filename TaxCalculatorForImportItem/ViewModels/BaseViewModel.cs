@@ -8,7 +8,7 @@ namespace TaxCalculatorForImportItem
 {
 
     [ImplementPropertyChanged]
-    class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         #region Public Event Handler
 
@@ -225,6 +225,7 @@ namespace TaxCalculatorForImportItem
         /// <param name="value">converted item cost</param>
         private void AssesedValueCalculation(float value)
         {
+            ConvertedToRs = value;
             value = value + value * (CurrencyTolerancePercentage / 100);
             value = value + value * (InsurancePercentage / 100);
             AssesedValue = (String)value.ToString();

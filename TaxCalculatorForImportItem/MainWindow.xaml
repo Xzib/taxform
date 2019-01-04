@@ -1,20 +1,63 @@
-﻿<Window x:Class="TaxCalculatorForImportItem.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaxCalculatorForImportItem"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="TaxCalculatorForImportItem.MainWindow"
         mc:Ignorable="d"
         Title="Tax Calculator" Height="450" Width="450">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+            <GradientStop Color="#ABADB3" Offset="0.05"/>
+            <GradientStop Color="#E2E3EA" Offset="0.07"/>
+            <GradientStop Color="#E3E9EF" Offset="1"/>
+        </LinearGradientBrush>
+        <Style BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Themes:ListBoxChrome x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" SnapsToDevicePixels="true">
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Themes:ListBoxChrome>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
 
     <Border Padding="5">
         <Border.Background>
             <LinearGradientBrush>
-                <GradientStop Color="DarkGreen" Offset="0"/>
-                <GradientStop Color="LightGreen" Offset="0.5"/>
-                <GradientStop Color="DarkGreen" Offset="1"/>
-
+                <GradientStop Color="LightGreen" Offset="0"/>
+                <GradientStop Color="SeaGreen" Offset="0.5"/>
+                <GradientStop Color="LightGreen" Offset="1"/>
             </LinearGradientBrush>
         </Border.Background>
 
@@ -31,9 +74,7 @@
 
                     <TextBox
                     x:Name="ItemName"
-                    Text="{Binding ItemName, 
-                    Converter={x:Static local:FloatToTextConverter.instance}, 
-                    Mode=TwoWay}"
+                    Text="{Binding ItemName, Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
                     Grid.Column="0" 
                     Margin="0 5 10 10"
                     Padding="2"
@@ -48,9 +89,7 @@
 
                     <!--Item Cost-->
                     <TextBox 
-                    Text="{Binding VendorName, 
-                    Converter={x:Static local:FloatToTextConverter.instance}, 
-                    Mode=TwoWay}"
+                    Text="{Binding VendorName, Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
                     x:Name="VendorName"     
                     Grid.Column="1"                       
                     Margin="0 5 10 10"
@@ -76,9 +115,7 @@
 
                     <TextBox
                     
-                    Text="{Binding ItemCost, 
-                    Converter={x:Static local:FloatToTextConverter.instance}, 
-                    Mode=TwoWay}"
+                    Text="{Binding ItemCost, Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
                     x:Name="ItemCost"
                     Grid.Column="0" 
                     Margin="0 2 10 10"
@@ -96,9 +133,7 @@
                     <!--Currency Conversion To Rs-->
                     <TextBox 
                    
-                    Text="{Binding ConvertedToRs, 
-                    Converter={x:Static local:FloatToTextConverter.instance}, 
-                    Mode=TwoWay}"
+                    Text="{Binding ConvertedToRs, Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
                     x:Name="ConvertedToRs"     
                     Grid.Column="2"                       
                     Margin="0 2 10 10"
@@ -113,11 +148,11 @@
                     Text="{Binding AvailableCurrency}"
                     x:Name="CurrencySelection" 
                     Grid.Column="1" Margin="0 20 10 10">
-                    <ComboBoxItem>USD</ComboBoxItem>
-                    <ComboBoxItem>EUR</ComboBoxItem>
-                    <ComboBoxItem>GBP</ComboBoxItem>
-                    <ComboBoxItem>YUAN</ComboBoxItem>
-                    <ComboBoxItem>Rs</ComboBoxItem>
+                    <ComboBoxItem Content="USD"/>
+                    <ComboBoxItem Content="EUR"/>
+                    <ComboBoxItem Content="GBP"/>
+                    <ComboBoxItem Content="YUAN"/>
+                    <ComboBoxItem Content="Rs"/>
                 </ComboBox>
 
 
@@ -127,14 +162,7 @@
                        FontWeight="Bold"
                        FontSize="17"/>
             <Border>
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#eeee" Offset="0.5"/>
-                        <GradientStop Color="White" Offset="1"/>
-
-                    </LinearGradientBrush>
-                </Border.Background>
+             
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
@@ -143,16 +171,14 @@
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="Currency Tolerance" />
                         <TextBox 
-                            Text="{Binding CurrencyTolerancePercentage, 
-                            Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}" 
+                            Text="{Binding CurrencyTolerancePercentage, Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}" 
                             x:Name="CurrencyTolerance"     
                             Background="#eeee"
                             Margin="0 0 0 2"
                             HorizontalAlignment="Left" Width="66"/>
                         <TextBlock Text="Insurance" />
                         <TextBox 
-                            Text="{Binding InsurancePercentage, 
-                            Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
+                            Text="{Binding InsurancePercentage, Converter={x:Static local:FloatToTextConverter.instance}, Mode=TwoWay}"
                             x:Name="Insurance"    
                             Background="#eeee"
                             Margin="0 0 0 10"
@@ -185,16 +211,7 @@
 
 
             <Border>
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#eeee" Offset="0.5"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-
-
-
+                
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.08*"/>
@@ -202,17 +219,17 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBox Name="ACD" 
+                        <TextBox x:Name="ACD" 
                                  HorizontalAlignment="Left" 
                                  Width="25"
                                  Text="{Binding ACD, Converter={x:Static local:FloatToTextConverter.instance}}"/>
-                        <TextBox Name="CD"  
+                        <TextBox x:Name="CD"  
                                  HorizontalAlignment="Left" 
                                  Width="25"
                                  Text="{Binding CD, Converter={x:Static local:FloatToTextConverter.instance}}"/>
-                        <TextBox Name="ST" HorizontalAlignment="Left" Width="25"
+                        <TextBox x:Name="ST" HorizontalAlignment="Left" Width="25"
                                  Text="{Binding ST, Converter={x:Static local:FloatToTextConverter.instance}}"/>
-                        <TextBox Name="IT" HorizontalAlignment="Left" Width="25"
+                        <TextBox x:Name="IT" HorizontalAlignment="Left" Width="25"
                                  Text="{Binding IT, Converter={x:Static local:FloatToTextConverter.instance}}"/>
                     </StackPanel>
 
@@ -229,7 +246,7 @@
                                FontSize="16"/>
                         <TextBox 
                             Text="{Binding TotalTax}"
-                            Name="totaltax"
+                            x:Name="totaltax"
                              Background="#eeee"
                             IsEnabled="False"
                              />
@@ -238,7 +255,7 @@
                                FontSize="16"/>
                         <TextBox 
                             Text="{Binding GrandTotal}"
-                            Name="grandtotal"
+                            x:Name="grandtotal"
                              Background="#eeee"
                             IsEnabled="False"/>
                     </StackPanel>
@@ -246,12 +263,6 @@
             </Border>
 
             <Grid>
-                <Grid.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#eeee" Offset="1"/>
-                    </LinearGradientBrush>
-                </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160*"/>
                     <ColumnDefinition Width="51*"/>
