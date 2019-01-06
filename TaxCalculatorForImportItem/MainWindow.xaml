@@ -7,6 +7,7 @@
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="TaxCalculatorForImportItem.MainWindow"
         mc:Ignorable="d"
         Title="Tax Calculator" Height="450" Width="450">
+    
     <Window.Resources>
         <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
             <GradientStop Color="#ABADB3" Offset="0.05"/>
