@@ -275,7 +275,7 @@
                         Content="Submit" 
                         HorizontalAlignment="Center" 
                         Margin="10 0"
-                        Padding="3"/>
+                        Padding="3" />
                 </StackPanel>
 
             </Grid>
