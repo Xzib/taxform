@@ -78,7 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataBase.cs" />
     <Compile Include="ENUM\CurrencyValue.cs" />
     <Compile Include="Converters\FloatToTextConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
