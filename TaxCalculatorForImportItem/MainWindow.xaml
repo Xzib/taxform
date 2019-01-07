@@ -26,14 +26,11 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Item Name"
-                           
                            FontSize="14"/>
 
                     <TextBox
                     x:Name="ItemName"
-                    Text="{Binding ItemName, 
-                    Converter={x:Static local:FloatToTextConverter.instance}, 
-                    Mode=TwoWay}"
+                    Text="{Binding ItemName, Mode=TwoWay}"
                     Grid.Column="0" 
                     Margin="0 5 10 10"
                     Padding="2"
@@ -48,9 +45,7 @@
 
                     <!--Item Cost-->
                     <TextBox 
-                    Text="{Binding VendorName, 
-                    Converter={x:Static local:FloatToTextConverter.instance}, 
-                    Mode=TwoWay}"
+                    Text="{Binding VendorName,Mode=TwoWay}"
                     x:Name="VendorName"     
                     Grid.Column="1"                       
                     Margin="0 5 10 10"
@@ -90,6 +85,7 @@
 
                 <StackPanel Grid.Column="2">
                     <TextBlock 
+                        x:Name="ConvertToRs"
                         Text="RS Conversion"
                         FontSize="14"/>
 
@@ -228,8 +224,8 @@
                                HorizontalAlignment="Center" 
                                FontSize="16"/>
                         <TextBox 
-                            Text="{Binding TotalTax}"
-                            Name="totaltax"
+                            Text="{Binding TotalTax, Mode=TwoWay}"
+                            x:Name="Totaltax"
                              Background="#eeee"
                             IsEnabled="False"
                              />
@@ -238,7 +234,7 @@
                                FontSize="16"/>
                         <TextBox 
                             Text="{Binding GrandTotal}"
-                            Name="grandtotal"
+                            x:Name="Grandtotal"
                              Background="#eeee"
                             IsEnabled="False"/>
                     </StackPanel>
@@ -275,7 +271,8 @@
                         Content="Submit" 
                         HorizontalAlignment="Center" 
                         Margin="10 0"
-                        Padding="3"/>
+                        Padding="3"
+                        Command="{Binding SubmitButtonPressedCommand}" Click="Button_Click"/>
                 </StackPanel>
 
             </Grid>

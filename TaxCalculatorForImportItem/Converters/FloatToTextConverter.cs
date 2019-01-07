@@ -15,11 +15,15 @@ namespace TaxCalculatorForImportItem
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string mValue = (String)value;
+            
 
+
+            
+            string mValue = (String)value;
             float val;
             bool check = float.TryParse(mValue, out val);
             return val;
+            
         }
     }
 }

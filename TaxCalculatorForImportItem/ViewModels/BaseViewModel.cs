@@ -27,6 +27,7 @@ namespace TaxCalculatorForImportItem
         public BaseViewModel()
         {
             this.OKButtonPressedCommand = new DelegateCommand(this.GetGrandTotal);
+           
         }
 
         #endregion
@@ -50,20 +51,11 @@ namespace TaxCalculatorForImportItem
         /// </summary>
         public float ConvertedToRs { get; set; } = 0.00F;
 
-
-
-
-
         /// <summary>
         /// Actual Cost of the item
         /// </summary>
 
-
-
-
-
-
-        public float ItemCost { get; set; } = 0;
+        public float ItemCost { get; set; } = 0.00F;
 
         #region PercentageInputs
         
@@ -102,7 +94,7 @@ namespace TaxCalculatorForImportItem
         /// <summary>
         /// Actual Value of item 
         /// </summary>
-        public string AssesedValue { get; set; } = "0";
+        public string AssesedValue { get; set; } = "0F";
 
         /// <summary>
         /// Total Tax on the item
@@ -134,6 +126,7 @@ namespace TaxCalculatorForImportItem
         #region Commands
 
         public DelegateCommand OKButtonPressedCommand { get; set; }
+        
 
         #endregion
 
