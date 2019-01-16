@@ -34,8 +34,7 @@ namespace TaxCalculatorForImportItem
 
         #region Public Properties
 
-
-
+        #region UserProvided Data
         /// <summary>
         /// Name Of Item
         /// </summary>
@@ -57,8 +56,12 @@ namespace TaxCalculatorForImportItem
 
         public float ItemCost { get; set; } = 0.00F;
 
+
+        #endregion
+
+
         #region PercentageInputs
-        
+
         /// <summary>
         /// Currenct Tolerance set to 1% initial
         /// </summary>
@@ -91,10 +94,13 @@ namespace TaxCalculatorForImportItem
 
         #endregion
 
+
+        #region Calculated Outputs
+
         /// <summary>
         /// Actual Value of item 
         /// </summary>
-        public string AssesedValue { get; set; } = "0F";
+        public string AssesedValue { get; set; } = "0";
 
         /// <summary>
         /// Total Tax on the item
@@ -105,11 +111,11 @@ namespace TaxCalculatorForImportItem
         /// Grand Total
         /// </summary>
         public string GrandTotal { get; set; } = "0";
+        #endregion
 
         #region Currency Model
 
         public String AvailableCurrency { get; set; }
-
 
         /// <summary>
         /// Currency Rates
@@ -118,8 +124,10 @@ namespace TaxCalculatorForImportItem
         public float EuroExchangeRate { get; set; } = 160.28F;
         public float GBPExchangeRate { get; set; } = 178.16F;
 
-        #endregion
 
+
+
+        #endregion
 
         #endregion
 
